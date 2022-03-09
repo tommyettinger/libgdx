@@ -73,4 +73,101 @@ public class MathUtilsTest {
 		assertEquals(-1f, MathUtils.cosDeg(180f), 0f);
 		assertEquals(0f, MathUtils.cosDeg(270f), 0f);
 	}
+
+	@Test
+	public void testAtan2 () {
+		float large = Float.MAX_VALUE, small = Float.MIN_VALUE;
+		assertFalse(Float.isNaN(MathUtils.atan2(0f, 0f)));
+		assertFalse(Float.isNaN(MathUtils.atan2(large, 0f)));
+		assertFalse(Float.isNaN(MathUtils.atan2(0f, large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-large, 0f)));
+		assertFalse(Float.isNaN(MathUtils.atan2(0f, -large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(small, 0f)));
+		assertFalse(Float.isNaN(MathUtils.atan2(0f, small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-small, 0f)));
+		assertFalse(Float.isNaN(MathUtils.atan2(0f, -small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(large, large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-large, large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-large, -large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(large, -large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(small, small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-small, small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-small, -small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(small, -small)));
+		large = Float.POSITIVE_INFINITY;
+		assertFalse(Float.isNaN(MathUtils.atan2(large, 0f)));
+		assertFalse(Float.isNaN(MathUtils.atan2(0f, large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-large, 0f)));
+		assertFalse(Float.isNaN(MathUtils.atan2(0f, -large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(small, 0f)));
+		assertFalse(Float.isNaN(MathUtils.atan2(0f, small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-small, 0f)));
+		assertFalse(Float.isNaN(MathUtils.atan2(0f, -small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(large, large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-large, large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-large, -large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(large, -large)));
+		assertFalse(Float.isNaN(MathUtils.atan2(small, small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-small, small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(-small, -small)));
+		assertFalse(Float.isNaN(MathUtils.atan2(small, -small)));
+	}
+
+	/** Returns atan2 in radians, less accurate than Math.atan2 but may be faster. Average error of 0.00231 radians (0.1323
+	 * degrees), largest error of 0.00488 radians (0.2796 degrees). */
+	static public float atan2 (float y, float x) {
+		if (x == 0f) {
+			if (y > 0f) return HALF_PI;
+			if (y == 0f) return 0f;
+			return -HALF_PI;
+		}
+		final float atan, z = y / x;
+		if (Math.abs(z) < 1f) {
+			atan = z / (1f + 0.28f * z * z);
+			if (x < 0f) return atan + (y < 0f ? -PI : PI);
+			return atan;
+		}
+		atan = HALF_PI - z / (z * z + 0.28f);
+		return y < 0f ? atan - PI : atan;
+	}
+
+	@Test(expected = AssertionError.class)
+	public void testOldAtan2 () {
+		float large = Float.MAX_VALUE, small = Float.MIN_VALUE;
+		assertFalse(Float.isNaN(atan2(0f, 0f)));
+		assertFalse(Float.isNaN(atan2(large, 0f)));
+		assertFalse(Float.isNaN(atan2(0f, large)));
+		assertFalse(Float.isNaN(atan2(-large, 0f)));
+		assertFalse(Float.isNaN(atan2(0f, -large)));
+		assertFalse(Float.isNaN(atan2(small, 0f)));
+		assertFalse(Float.isNaN(atan2(0f, small)));
+		assertFalse(Float.isNaN(atan2(-small, 0f)));
+		assertFalse(Float.isNaN(atan2(0f, -small)));
+		assertFalse(Float.isNaN(atan2(large, large)));
+		assertFalse(Float.isNaN(atan2(-large, large)));
+		assertFalse(Float.isNaN(atan2(-large, -large)));
+		assertFalse(Float.isNaN(atan2(large, -large)));
+		assertFalse(Float.isNaN(atan2(small, small)));
+		assertFalse(Float.isNaN(atan2(-small, small)));
+		assertFalse(Float.isNaN(atan2(-small, -small)));
+		assertFalse(Float.isNaN(atan2(small, -small)));
+		large = Float.POSITIVE_INFINITY;
+		assertFalse(Float.isNaN(atan2(large, 0f)));
+		assertFalse(Float.isNaN(atan2(0f, large)));
+		assertFalse(Float.isNaN(atan2(-large, 0f)));
+		assertFalse(Float.isNaN(atan2(0f, -large)));
+		assertFalse(Float.isNaN(atan2(small, 0f)));
+		assertFalse(Float.isNaN(atan2(0f, small)));
+		assertFalse(Float.isNaN(atan2(-small, 0f)));
+		assertFalse(Float.isNaN(atan2(0f, -small)));
+		assertFalse(Float.isNaN(atan2(large, large)));
+		assertFalse(Float.isNaN(atan2(-large, large)));
+		assertFalse(Float.isNaN(atan2(-large, -large)));
+		assertFalse(Float.isNaN(atan2(large, -large)));
+		assertFalse(Float.isNaN(atan2(small, small)));
+		assertFalse(Float.isNaN(atan2(-small, small)));
+		assertFalse(Float.isNaN(atan2(-small, -small)));
+		assertFalse(Float.isNaN(atan2(small, -small)));
+	}
+
 }
