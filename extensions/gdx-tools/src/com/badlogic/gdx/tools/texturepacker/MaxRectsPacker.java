@@ -83,10 +83,9 @@ public class MaxRectsPacker implements Packer {
 
 		Array<Page> pages = new Array();
 		while (inputRects.size > 0) {
-			if(progress != null) {
+			if (progress != null) {
 				progress.count = n - inputRects.size + 1;
-				if (progress.update(progress.count, n))
-					break;
+				if (progress.update(progress.count, n)) break;
 			}
 			Page result = packPage(inputRects);
 			pages.add(result);
