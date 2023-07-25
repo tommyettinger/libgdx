@@ -65,9 +65,9 @@ public class TexturePacker {
 		this.settings = settings;
 
 		if (settings.pot) {
-			if (settings.maxWidth != MathUtils.nextPowerOfTwo(settings.maxWidth))
+			if (Integer.bitCount(settings.maxWidth) != 1)
 				throw new RuntimeException("If pot is true, maxWidth must be a power of two: " + settings.maxWidth);
-			if (settings.maxHeight != MathUtils.nextPowerOfTwo(settings.maxHeight))
+			if (Integer.bitCount(settings.maxHeight) != 1)
 				throw new RuntimeException("If pot is true, maxHeight must be a power of two: " + settings.maxHeight);
 		}
 

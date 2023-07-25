@@ -63,8 +63,6 @@ public class ColorBleedEffect {
 				int column = x + offsets[i];
 				int row = y + offsets[i + 1];
 				if (column < 0 || column >= width || row < 0 || row >= height) {
-					column = x;
-					row = y;
 					continue;
 				}
 
@@ -92,15 +90,15 @@ public class ColorBleedEffect {
 	}
 
 	static private int red (int argb) {
-		return (argb >> 16) & 0xFF;
+		return (argb >>> 16) & 0xFF;
 	}
 
 	static private int green (int argb) {
-		return (argb >> 8) & 0xFF;
+		return (argb >>> 8) & 0xFF;
 	}
 
 	static private int blue (int argb) {
-		return (argb >> 0) & 0xFF;
+		return (argb >>> 0) & 0xFF;
 	}
 
 	static private int argb (int a, int r, int g, int b) {
@@ -167,7 +165,7 @@ public class ColorBleedEffect {
 		}
 
 		static private int alpha (int argb) {
-			return (argb >> 24) & 0xff;
+			return (argb >>> 24);
 		}
 	}
 }
