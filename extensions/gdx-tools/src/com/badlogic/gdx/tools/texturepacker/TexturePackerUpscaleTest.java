@@ -25,7 +25,7 @@ public class TexturePackerUpscaleTest {
 		settings.scaleResampling = new TexturePacker.Resampling[] {TexturePacker.Resampling.nearest};
 
 		TexturePacker packer = new TexturePacker(settings);
-		packer.addImage(new File("tests/gdx-tests-gwt/war/assets/data/bobrgb888-32x32.png"));
+		packer.addImage(new File("tests/gdx-tests-android/assets/data/bobrgb888-32x32.png"));
 
 		File out = new File("tmp/packout");
 

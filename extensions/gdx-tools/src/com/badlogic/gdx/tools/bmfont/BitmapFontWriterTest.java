@@ -38,7 +38,7 @@ public class BitmapFontWriterTest extends ApplicationAdapter {
 		param.packer = new PixmapPacker(1024, 1024, Pixmap.Format.RGBA8888, 2, false, new PixmapPacker.SkylineStrategy());
 
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(
-			Gdx.files.absolute("../../tests/gdx-tests-android/assets/data/unbom.ttf"));
+			Gdx.files.local("tests/gdx-tests-android/assets/data/unbom.ttf"));
 
 		generatedFont = generator.generateFont(param);
 
