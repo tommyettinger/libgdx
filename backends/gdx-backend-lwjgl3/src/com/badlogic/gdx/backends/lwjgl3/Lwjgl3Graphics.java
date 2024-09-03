@@ -73,7 +73,7 @@ public class Lwjgl3Graphics extends AbstractGraphics implements Disposable {
 	GLFWFramebufferSizeCallback resizeCallback = new GLFWFramebufferSizeCallback() {
 		@Override
 		public void invoke (long windowHandle, final int width, final int height) {
-			if (Configuration.GLFW_CHECK_THREAD0.get(true)) {
+			if (!Configuration.GLFW_LIBRARY_NAME.get().equals("glfw_async")) {
 				updateFramebufferInfo();
 				if (!window.isListenerInitialized()) {
 					return;
