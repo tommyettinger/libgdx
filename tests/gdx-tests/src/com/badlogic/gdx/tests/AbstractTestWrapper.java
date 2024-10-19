@@ -104,11 +104,11 @@ public abstract class AbstractTestWrapper extends GdxTest {
 			@Override
 			public boolean keyDown (int keycode) {
 				if (keycode == Keys.UP) {
-					scroll.setScrollY(scroll.getScrollY() + table.getRowHeight(0));
+					scroll.setScrollY(scroll.getScrollY() - table.getRowHeight(0));
 					return true;
 				}
 				if (keycode == Keys.DOWN) {
-					scroll.setScrollY(scroll.getScrollY() - table.getRowHeight(0));
+					scroll.setScrollY(scroll.getScrollY() + table.getRowHeight(0));
 					return true;
 				}
 				return false;

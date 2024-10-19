@@ -962,7 +962,7 @@ public class SpriteBatch implements Batch {
 		lastTexture.bind();
 		Mesh mesh = this.mesh;
 		mesh.setVertices(vertices, 0, idx);
-		Buffer indicesBuffer = (Buffer)mesh.getIndicesBuffer(false);
+		Buffer indicesBuffer = (Buffer)mesh.getIndicesBuffer(true);
 		indicesBuffer.position(0);
 		indicesBuffer.limit(count);
 
