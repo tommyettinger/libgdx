@@ -61,8 +61,8 @@ public abstract class AbstractTestWrapper extends GdxTest {
 		container = new Table();
 		ui.addActor(container);
 		container.debug();
-		Table table = new Table();
-		ScrollPane scroll = new ScrollPane(table);
+		final Table table = new Table();
+		final ScrollPane scroll = new ScrollPane(table);
 		container.add(scroll).expand().fill();
 		container.setFillParent(true);
 		table.pad(10).defaults().expandX().space(4);
@@ -99,6 +99,19 @@ public abstract class AbstractTestWrapper extends GdxTest {
 						Gdx.app.log("GdxTestGwt", "Exiting current test.");
 						dispose = true;
 					}
+				}
+				return false;
+			}
+
+			@Override
+			public boolean keyDown(int keycode) {
+				if(keycode == Keys.UP){
+					scroll.setScrollY(scroll.getScrollY() + table.getRowHeight(0));
+					return true;
+				}
+				if(keycode == Keys.DOWN){
+					scroll.setScrollY(scroll.getScrollY() - table.getRowHeight(0));
+					return true;
 				}
 				return false;
 			}

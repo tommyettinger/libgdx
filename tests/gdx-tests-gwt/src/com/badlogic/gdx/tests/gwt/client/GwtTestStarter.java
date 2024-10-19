@@ -37,6 +37,8 @@ public class GwtTestStarter extends GwtApplication {
 			ShaderProgram.prependFragmentCode = "#version 300 es\n#define varying in\n#define texture2D texture\n#define gl_FragColor fragColor\nprecision mediump float;\nout vec4 fragColor;\n";
 		}
 
+		config.useDebugGL = true;
+
 		// config.openURLInNewWindow = true;
 		return config;
 	}
