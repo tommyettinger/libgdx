@@ -38,9 +38,6 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 public abstract class AbstractTestWrapper extends GdxTest {
 	Stage ui;
 	Table container;
@@ -67,12 +64,12 @@ public abstract class AbstractTestWrapper extends GdxTest {
 		container.setFillParent(true);
 		table.pad(10).defaults().expandX().space(4);
 		// TODO: temporarily disabled sorting while scrolling is completely broken on GWT
-//		Arrays.sort(tests, new Comparator<Instancer>() {
-//			@Override
-//			public int compare (Instancer o1, Instancer o2) {
-//				return o1.getSimpleName().compareTo(o2.getSimpleName());
-//			}
-//		});
+// Arrays.sort(tests, new Comparator<Instancer>() {
+// @Override
+// public int compare (Instancer o1, Instancer o2) {
+// return o1.getSimpleName().compareTo(o2.getSimpleName());
+// }
+// });
 		for (final Instancer instancer : tests) {
 			table.row();
 			TextButton button = new TextButton(instancer.getSimpleName(), skin);
