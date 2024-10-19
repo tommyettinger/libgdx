@@ -14,7 +14,22 @@
  * limitations under the License.
  ******************************************************************************/
 
+apply plugin: "java"
+
+if (JavaVersion.current().isJava9Compatible()) {
+	compileJava {
+		options.release = versions.java
+	}
+}
+
+java.sourceCompatibility = 8
+java.targetCompatibility = 8
+
+sourceSets.main.java.srcDirs = ["src"]
+sourceSets.main.resources.srcDirs = ["res"]
+
 dependencies {
+	api project(":gdx")
 	api libraries.gwt
 	compileOnly libraries.compileOnly.gwt
 }
@@ -28,8 +43,8 @@ javadoc {
 	exclude "com/badlogic/gdx/backends/gwt/emu/**"
 	options.addStringOption("sourcepath", "src/")
 }
-apply plugin: 'idea'
-idea.module.excludeDirs += [file("src/com/badlogic/gdx/backends/gwt/emu")]
+//apply plugin: 'idea'
+//idea.module.excludeDirs += [file("src/com/badlogic/gdx/backends/gwt/emu")]
 
 sourceSets.main.java.exclude "**/System.java"
 

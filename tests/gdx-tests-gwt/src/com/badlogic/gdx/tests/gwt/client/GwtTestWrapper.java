@@ -23,7 +23,6 @@ import com.badlogic.gdx.tests.Box2DTest;
 import com.badlogic.gdx.tests.Box2DTestCollection;
 import com.badlogic.gdx.tests.BufferUtilsTest;
 import com.badlogic.gdx.tests.ClipboardTest;
-import com.badlogic.gdx.tests.TiledMapObjectPropertyTest;
 import com.badlogic.gdx.tests.ColorTest;
 import com.badlogic.gdx.tests.ComplexActionTest;
 import com.badlogic.gdx.tests.CustomShaderSpriteBatchTest;
@@ -76,6 +75,7 @@ import com.badlogic.gdx.tests.SimpleDecalTest;
 import com.badlogic.gdx.tests.SimpleStageCullingTest;
 import com.badlogic.gdx.tests.SortedSpriteTest;
 import com.badlogic.gdx.tests.SoundTest;
+import com.badlogic.gdx.tests.SpriteBatchPerformanceTest;
 import com.badlogic.gdx.tests.SpriteBatchShaderTest;
 import com.badlogic.gdx.tests.SpriteCacheOffsetTest;
 import com.badlogic.gdx.tests.SpriteCacheTest;
@@ -90,6 +90,7 @@ import com.badlogic.gdx.tests.TextInputDialogTest;
 import com.badlogic.gdx.tests.TextureAtlasTest;
 import com.badlogic.gdx.tests.TiledMapAtlasAssetManagerTest;
 import com.badlogic.gdx.tests.TiledMapObjectLoadingTest;
+import com.badlogic.gdx.tests.TiledMapObjectPropertyTest;
 import com.badlogic.gdx.tests.TimeUtilsTest;
 import com.badlogic.gdx.tests.UITest;
 import com.badlogic.gdx.tests.VertexBufferObjectShaderTest;
@@ -120,6 +121,12 @@ public class GwtTestWrapper extends AbstractTestWrapper {
 	@Override
 	protected AbstractTestWrapper.Instancer[] getTestList () {
 		ArrayList<Instancer> tests = new ArrayList<>();
+
+		tests.add(new GwtInstancer() {
+			public GdxTest instance () {
+				return new SpriteBatchPerformanceTest();
+			}
+		});
 
 		tests.add(new GwtInstancer() {
 			public GdxTest instance () {
