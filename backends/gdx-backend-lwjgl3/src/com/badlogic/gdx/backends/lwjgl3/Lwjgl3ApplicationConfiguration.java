@@ -21,8 +21,8 @@ import java.nio.IntBuffer;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.LifecycleListener;
-import com.badlogic.gdx.utils.Os;
-import com.badlogic.gdx.utils.SharedLibraryLoader;
+import com.badlogic.gdx.jnigen.commons.HostDetection;
+import com.badlogic.gdx.jnigen.commons.Os;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFW;
@@ -67,6 +67,7 @@ public class Lwjgl3ApplicationConfiguration extends Lwjgl3WindowConfiguration {
 	int depth = 16, stencil = 0;
 	int samples = 0;
 	boolean transparentFramebuffer;
+	boolean scaleFramebuffer = true;
 
 	int idleFPS = 60;
 	int foregroundFPS = 0;
@@ -105,6 +106,7 @@ public class Lwjgl3ApplicationConfiguration extends Lwjgl3WindowConfiguration {
 		stencil = config.stencil;
 		samples = config.samples;
 		transparentFramebuffer = config.transparentFramebuffer;
+		scaleFramebuffer = config.scaleFramebuffer;
 		idleFPS = config.idleFPS;
 		foregroundFPS = config.foregroundFPS;
 		pauseWhenMinimized = config.pauseWhenMinimized;
@@ -218,6 +220,15 @@ public class Lwjgl3ApplicationConfiguration extends Lwjgl3WindowConfiguration {
 		this.transparentFramebuffer = transparentFramebuffer;
 	}
 
+	/** Sets whether the framebuffer should be resized according to the window content scale, see
+	 * <a href="https://www.glfw.org/docs/latest/window_guide.html#GLFW_SCALE_FRAMEBUFFER_hint">GLFW_SCALE_FRAMEBUFFER</a>. Only
+	 * has an effect on Wayland and macOS. Default is true.
+	 *
+	 * @param scaleFramebuffer whether the framebuffer should be scaled with the content scale (default true) */
+	public void setScaleFramebuffer (boolean scaleFramebuffer) {
+		this.scaleFramebuffer = scaleFramebuffer;
+	}
+
 	/** Sets the polling rate during idle time in non-continuous rendering mode. Must be positive. Default is 60. */
 	public void setIdleFPS (int fps) {
 		this.idleFPS = fps;
@@ -277,7 +288,7 @@ public class Lwjgl3ApplicationConfiguration extends Lwjgl3WindowConfiguration {
 	 *
 	 * @see <a href= "https://libgdx.com/news/2021/07/devlog-7-lwjgl3#do-i-need-to-do-anything-else"> Documentation</a> */
 	public static void useGlfwAsync () {
-		if (SharedLibraryLoader.os == Os.MacOsX) {
+		if (HostDetection.os == Os.MacOsX) {
 			Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
 		}
 	}
