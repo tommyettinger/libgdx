@@ -110,7 +110,3 @@ tasks.register('buildRunnables') {
 		println "Building ye runnables"
 	}
 }
-
-tasks.named('processResources').configure {
-	dependsOn ':fetchNatives'
-}
